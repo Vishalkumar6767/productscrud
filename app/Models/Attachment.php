@@ -12,8 +12,7 @@ class Attachment extends Model
         'original_name',
         'stored_name',
         'folder_name',
-        'attachmentable_type',
-        'attachmentable_id'
+        
     ];
 
 

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttachmentRequest;
 use App\Http\Requests\ProductRequest;
+use App\Traits\AttachmentTrait;
 use App\Traits\ProductTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    use ProductTrait;
+    use ProductTrait, AttachmentTrait;
     /**
      * Display a listing of the resource.
      */
@@ -75,6 +77,32 @@ class ProductController extends Controller
     public function destroy(int $id)
     {
         $data = $this->delete($id);
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
+    }
+    public function upload($productId, AttachmentRequest $request ){
+        $data = $this->storeAttachments($productId,$request->validated());
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
+
+    }
+    public function updateAttachment(int $id, AttachmentRequest $request ){
+    
+        $data = $this->updateAttachments($id, $request->validated());
+        
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
+
+    }
+    public function destroyAttachment(int $id)
+    {
+        $data = $this->deleteAttachments($id);
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
