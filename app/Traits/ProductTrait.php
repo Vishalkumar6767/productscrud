@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 trait ProductTrait
 {
 public function collection(){
-    $product = Product:: with('category','subCategory')->get()->all();
+    $product = Product:: with('attachments','category','subCategory')->get();
    
     return $product;
 

@@ -16,12 +16,8 @@ return new class extends Migration
             $table->string('original_name');
             $table->string('stored_name');
             $table->string('folder_name');
-            $table->string('attachmentable_type');
-            $table->unsignedBigInteger('attachmentable_id');
-            $table->timestamps();
-
-            // Polymorphic Index
-            $table->index(['attachmentable_type', 'attachmentable_id']);
+            $table->morphs('attachmentable');
+            $table->timestamps(); 
         });
         
     }
