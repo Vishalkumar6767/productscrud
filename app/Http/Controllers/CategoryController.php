@@ -2,64 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Traits\CategoryTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use CategoryTrait;
+
     public function index()
     {
-        //
+        $data = $this->collection();
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(CategoryRequest $request)
     {
-        //
+        $data = $this->storeCategory($request->validated());
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(Category $category)
     {
-        //
+       
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
+  
+    public function update(int $id, CategoryRequest $request)
     {
-        //
+        $data = $this->updateCategory($id, $request->validated());
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
+   
+    public function destroy(int $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
+        $data = $this->delete($id);
+        if(isset($data['errors'])){
+            return response()->json($data['errors'],400);
+        }
+        return response()->json($data,200);
     }
 }
