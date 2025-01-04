@@ -20,4 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/product', [ProductController::class, 'store']);
     Route::put('/product/{id}', [ProductController::class, 'update']);
     Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+    Route::post('/product/{id}/attachments', [ProductController::class, 'upload']);
+    Route::put('/attachments/{id}', [ProductController::class, 'updateAttachment']);
+    Route::delete('/attachments/{id}', [ProductController::class, 'destroyAttachment']);
 });

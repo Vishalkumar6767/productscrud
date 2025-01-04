@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Product;
 use App\Traits\ProductTrait;
-use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -14,17 +17,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = $this->collection();
-        if(isset($data['errors'])){
-            return response()->json($data['errors'],400);
+        $products = $this->collection();
+        if(isset($products['errors'])){
+            return response()->json($products['errors'],400);
         }
-        return response()->json($data,200);
+        return  view('products.index', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-  
+    public function create()
+    {
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -34,7 +41,7 @@ class ProductController extends Controller
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -52,9 +59,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -66,7 +74,7 @@ class ProductController extends Controller
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -80,4 +88,5 @@ class ProductController extends Controller
         }
         return response()->json($data,200);
     }
+   
 }
