@@ -13,12 +13,18 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $data = $this->collection();
-        if(isset($data['errors'])){
-            return response()->json($data['errors'],400);
+        $categories = $this->collection();
+        if(isset($categories['errors'])){
+            return response()->json($categories['errors'],400);
         }
-        return response()->json($data,200);
+        return  view('categories.index', compact('categories'));
         
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('categories.create', compact('categories'));
     }
 
     public function store(CategoryRequest $request)
@@ -27,13 +33,19 @@ class CategoryController extends Controller
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
+        return redirect()->route('categories.index');
     }
 
    
     public function show(Category $category)
     {
        
+    }
+
+    public function edit(Category $category)
+    {
+        $categories = Category::all();
+        return view('categories.edit', compact('category', 'categories'));
     }
 
   

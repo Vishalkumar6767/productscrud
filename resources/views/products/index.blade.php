@@ -33,7 +33,7 @@
                                 <ul class="attachment-list">
                                     @foreach ($product->attachments as $attachment)
                                         <li>
-                                            <a href="{{ asset('storage/' . $attachment->stored_name) }}" 
+                                            <a href="{{ asset('storage/assets/attachments/' . $attachment->stored_name) }}" 
                                                class="attachment-link" 
                                                target="_blank">
                                                 {{ $attachment->original_name }}
