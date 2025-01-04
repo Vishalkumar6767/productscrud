@@ -27,6 +27,7 @@ class ProductRequest extends FormRequest
             'sub_category_id' => 'nullable|exists:categories,id',
             'cost' => 'required|numeric|min:0',
             'price' => 'required|numeric|min:0',
+            'attachments.*' => 'file|mimes:jpeg,png,jpg,pdf|max:2048',
             
             
         ];
