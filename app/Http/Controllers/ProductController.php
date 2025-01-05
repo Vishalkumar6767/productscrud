@@ -7,7 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Traits\ProductTrait;
-
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -15,9 +15,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->collection();
+        $products = $this->collection($request->all());
         if(isset($products['errors'])){
             return response()->json($products['errors'],400);
         }
