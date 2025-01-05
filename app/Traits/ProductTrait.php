@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -9,11 +10,26 @@ use Illuminate\Support\Str;
 
 trait ProductTrait
 {
-public function collection(){
-    $product = Product:: with('attachments','category','subCategory')->get();
-   
-    return $product;
+public function collection($inputs){
 
+
+    $query = Product::query();
+        
+    if (!empty($inputs['search'])) {
+        $search = $inputs['search'];
+        $query->where('name', 'like', "%{$search}%")
+              ->orWhereHas('category', function ($q) use ($search) {
+                  $q->where('name', 'like', "%{$search}%");
+              })
+              ->orWhereHas('subCategory', function ($q) use ($search) {
+                  $q->where('name', 'like', "%{$search}%");
+              });
+    }
+    
+    $products = $query->with(['category', 'subCategory', 'attachments'])->get();
+    return $products;
+
+    
 }
 public function storeProduct($inputs)
 {
@@ -99,28 +115,23 @@ public function updateProduct($id, $inputs)
         if (isset($inputs['attachments']) && is_array($inputs['attachments'])) {
             $existingAttachments = $product->attachments->pluck('stored_name')->toArray();
             $newAttachments = [];
-
             foreach ($inputs['attachments'] as $file) {
                 if ($file instanceof \Illuminate\Http\UploadedFile) {
                     $attachmentName = Str::uuid() . '.' . $file->getClientOriginalExtension();
                     $file->storeAs('public/assets/attachments', $attachmentName);
-
                     $product->attachments()->create([
                         'original_name' => $file->getClientOriginalName(),
                         'stored_name' => $attachmentName,
                         'folder_name' => 'attachments',
                     ]);
-
                     $newAttachments[] = $attachmentName;
                 }
             }
-
-            // Delete old attachments not included in the new upload
             $attachmentsToDelete = array_diff($existingAttachments, $newAttachments);
             foreach ($attachmentsToDelete as $attachmentName) {
                 $attachment = $product->attachments()->where('stored_name', $attachmentName)->first();
                 if ($attachment) {
-                    // Delete file from storage
+                  
                     Storage::delete('public/assets/attachments/' . $attachmentName);
                     $attachment->delete();
                 }
@@ -153,10 +164,7 @@ public function delete($id)
 
     try {
         DB::beginTransaction();
-
-        // Delete associated attachments
         foreach ($product->attachments as $attachment) {
-            // Delete the file from storage
             Storage::delete('public/assets/attachments/' . $attachment->stored_name);
             
             // Delete the attachment record from the database
@@ -183,7 +191,6 @@ public function delete($id)
         ];
     }
 }
-
 
 }
 

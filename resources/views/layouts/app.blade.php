@@ -1,11 +1,16 @@
 <!-- resources/views/layouts/app.blade.php -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product CRUD</title>
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.bunny.net">
+      <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+      <!-- Tailwind CSS -->
+     
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('quill/quill.snow.css') }}">
     <link rel="stylesheet" href="{{ asset('quill/quill.bubble.css') }}">
@@ -17,40 +22,21 @@
 </head>
 <body class="{{ !request()->cookie('sidebar-toggle') ? '' : 'toggle-sidebar' }}">
     <div class="container">
-        <!-- Header Section -->
-        <!-- <header>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('products.index') }}">Products</a></li>
-                    <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </nav>
-        </header> -->
-
-        <!-- Main Content Section -->
-
+    
         <main id="wrapper">
            
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
-                    @include('partials.topbar') <!-- Include Topbar -->
+                    @include('partials.topbar') 
                     <div class="main-content">
-                        @yield('content') <!-- Dynamic Content -->
+                        @yield('content') 
                     </div>
                 </div>
-                @include('partials.footer') <!-- Include Footer -->
+                @include('partials.footer') 
             </div>
         </main>
        
-
-        {{-- <!-- Footer Section -->
-        <footer>
-            <p>&copy; 2025 Product CRUD System. All rights reserved.</p>
-        </footer>
-    </div> --}}
-
-    <script src="{{ asset('js/app.js') }}"></script> <!-- Your JS files -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/app.js') }}"></script> 
 </body>
 </html>

@@ -1,12 +1,33 @@
-<!-- resources/views/products/index.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
 <div class="product-container">
     <h1 class="page-title">Product List</h1>
-    <a href="{{ route('products.create') }}" class="btn btn-primary">Create New Product</a>
-    
+    <div class="product-header">
+        <div class="header-left">
+            <form action="{{ route('products.index') }}" method="GET" class="search-container">
+                <div class="search-input-group">
+                    <input type="text" 
+                           id="searchInput" 
+                           name="search" 
+                           class="search-input" 
+                           placeholder="Search products..."
+                           value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="header-right">
+            <a href="{{ route('products.create') }}" class="btn btn-primary">Create New Product</a>
+        </div>
+    </div>
+    <div id="loader" class="loader-container" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
     <div class="product-table-container">
         <table class="product-table">
             <thead>
