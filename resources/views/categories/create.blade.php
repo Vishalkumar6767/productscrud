@@ -19,7 +19,7 @@
         
         <div class="form-group">
             <label for="cost" class="form-label">Parent Id</label>
-            <input type="number" name="parent_id" id="cost" class="form-control" required>
+            <input type="number" name="parent_id" id="cost" class="form-control">
         </div>
        
        

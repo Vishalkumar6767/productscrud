@@ -24,6 +24,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' =>'required|string',
             'short_name'=>'required|string',
+            'parent_id'=>'nullable|integer|exists:categories,id',
             
         ];
     }

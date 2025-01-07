@@ -53,9 +53,9 @@ class CategoryController extends Controller
     {
         $data = $this->updateCategory($id, $request->validated());
         if(isset($data['errors'])){
-            return response()->json($data['errors'],400);
+            return view('errors.error', ['errors' => $data['errors']]);
         }
-        return response()->json($data,200);
+        return redirect()->route('categories.index');
     }
 
    

@@ -15,14 +15,13 @@
         </div>
         
         <div class="form-group">
-            <label for="cost" class="form-label">Short Name</label>
-            <input type="text" name="short_name" id="cost" value="{{ $category->short_name }}" class="form-control" required>
+            <label for="short_name" class="form-label">Short Name</label>
+            <input type="text" name="short_name" id="short_name" value="{{ $category->short_name }}" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="price" class="form-label">Parent Id</label>
-            <input type="number" name="parent_id" id="price" value="{{ $category->parent_id }}" class="form-control" required>
+            <label for="parent_id" class="form-label">Parent Id</label>
+            <input type="number" name="parent_id" id="parent_id" value="{{ $category->parent_id }}" class="form-control">
         </div>
-        
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
