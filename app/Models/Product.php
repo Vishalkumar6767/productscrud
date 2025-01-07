@@ -30,4 +30,11 @@ class Product extends Model
         return $this->morphMany(Attachment::class, 'attachmentable');
     }
 
+   
+public function scopeWithoutTrashed($query)
+{
+    return $query->whereNull('deleted_at');
+}
+
+
 }

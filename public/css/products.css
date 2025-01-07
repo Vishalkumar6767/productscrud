@@ -61,38 +61,6 @@
     font-weight: 600;
 }
 
-/* Buttons */
-.btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-primary {
-    background: #3490dc;
-    color: white;
-}
-
-.btn-secondary {
-    background: #6c757d;
-    color: white;
-}
-
-.btn-danger {
-    background: #e3342f;
-    color: white;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
     .product-container {
         margin-left: 0;

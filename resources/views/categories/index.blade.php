@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -12,7 +11,7 @@
                     <th>Name</th>
                     <th>Short Name</th>
                     <th>Parent Id</th>
-                   
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,4 +36,5 @@
         </table>
     </div>
 </div>
+
 @endsection

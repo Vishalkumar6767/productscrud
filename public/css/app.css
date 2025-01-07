@@ -72,7 +72,7 @@ a:hover {
   margin: 0;
 }
 
-.header nav ul li a {
+.nav-link {
   color: #012970;
   font-weight: 600;
   padding: 0.5rem 1.5rem;
@@ -83,10 +83,12 @@ a:hover {
   gap: 0.5rem;
 }
 
-.header nav ul li a:hover {
+.nav-link:hover {
   background-color: #f6f9ff;
   color: #4154f1;
 }
+
+
 
 /* Responsive Layout */
 @media (min-width: 1200px) {
@@ -325,6 +327,7 @@ a:hover {
 
 .page-title {
   color: #012970;
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   font-size: 24px;
 }
@@ -712,4 +715,41 @@ a:hover {
     background: rgba(255, 255, 255, 0.7);
     display: none;
     z-index: 999;
+}
+
+
+.error-title {
+  font-size: 2.5rem;
+  color: #ff4d4d; /* Red for error title */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.error-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.error-item {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.error-btn {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.error-btn:hover {
+  background-color: #0056b3;
 }

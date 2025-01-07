@@ -11,10 +11,7 @@ use Illuminate\Support\Str;
 trait ProductTrait
 {
 public function collection($inputs){
-
-
-    $query = Product::query();
-        
+    $query = Product::query();   
     if (!empty($inputs['search'])) {
         $search = $inputs['search'];
         $query->where('name', 'like', "%{$search}%")
@@ -25,17 +22,13 @@ public function collection($inputs){
                   $q->where('name', 'like', "%{$search}%");
               });
     }
-    
     $products = $query->with(['category', 'subCategory', 'attachments'])->get();
-    return $products;
-
-    
+    return $products; 
 }
 public function storeProduct($inputs)
 {
     try {
         DB::beginTransaction();
-
         // Create the product
         $product = Product::create([
             'name' => $inputs['name'],
@@ -75,6 +68,7 @@ public function storeProduct($inputs)
             'message' => 'Product and attachments saved successfully.',
             'data' => $product->load('attachments'),
         ];
+      
         return $data;
 
     } catch (\Exception $e) {

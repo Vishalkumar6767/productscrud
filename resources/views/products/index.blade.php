@@ -38,7 +38,7 @@
                     <th>Cost</th>
                     <th>Price</th>
                     <th>Attachments</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,14 +68,22 @@
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-secondary">Edit</a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                <!-- Edit Button with Icon -->
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-secondary btn-uniform">
+                                    <i class="fas fa-edit"></i> <!-- FontAwesome Edit Icon -->
+                                </a>
+                        
+                                <!-- Delete Button with Icon -->
+                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-uniform">
+                                        <i class="fas fa-trash-alt"></i> <!-- FontAwesome Trash Icon -->
+                                    </button>
                                 </form>
                             </div>
                         </td>
+                                       
                     </tr>
                 @endforeach
             </tbody>

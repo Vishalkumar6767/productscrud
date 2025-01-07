@@ -18,7 +18,7 @@ trait CategoryTrait
             DB::beginTransaction();
             $category = Category::create([
                 'name' => $inputs['name'],
-                'short_name' => $inputs['category_id'],
+                'short_name' => $inputs['short_name'],
                 'parent_id' => $inputs['parent_id'],
                 
             ]);
@@ -52,11 +52,8 @@ trait CategoryTrait
        
         $category->update([
             'name'      => $inputs['name'],
-            'short_name'     => $inputs['category_id'],
+            'short_name'     => $inputs['short_name'],
             'parent_id'     => $inputs['parent_id'],
-           
-           
-    
         ]);
         DB::commit();
         $success['message'] = "Data updated successfully";

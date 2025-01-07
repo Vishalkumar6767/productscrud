@@ -11,7 +11,23 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="antialiased">
+        <div class="flex justify-end gap-4 mt-8 ">
+            @if (Route::has('login'))
+                <div class="space-x-4">
+                    @auth
+                        <a href="{{ route('products.index') }}" class="font-semibold text-[#FF2D20] hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Products</a>
+                        <a href="{{ route('categories.index') }}" class="font-semibold text-[#FF2D20] hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Categories</a>
+                    @else
+                        <a href="{{ route('login') }}" class="font-semibold text-[#FF2D20] hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="font-semibold text-[#FF2D20] hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+        </div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white"> Welcome to Products Dashboard</h1>
@@ -50,21 +66,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex justify-center gap-4 mt-8">
-                    @if (Route::has('login'))
-                        <div class="space-x-4">
-                            @auth
-                                <a href="{{ route('products.index') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Products</a>
-                                <a href="{{ route('categories.index') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Categories</a>
-                            @else
-                                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Log in</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Register</a>
-                                @endif
-                            @endauth
-                        </div>
-                    @endif
-                </div>
+               
             </div>
         </div>
     </body>

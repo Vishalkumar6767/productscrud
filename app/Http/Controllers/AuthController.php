@@ -10,13 +10,23 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     use AuthTrait;
+    public function showRegistration(){
+
+        return view('auth.register');
+
+    }
     public function signup(SignupRequest $request){
        
         $data = $this->register($request->validated());
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
+        return redirect()->route('dashboard');
+
+    }
+    public function showLogin(){
+       
+        return view('auth.login');
 
     }
     public function login(LoginRequest $request){
@@ -24,8 +34,7 @@ class AuthController extends Controller
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
-
+        return redirect()->route('dashboard');
 
 
 
@@ -36,7 +45,7 @@ class AuthController extends Controller
         if(isset($data['errors'])){
             return response()->json($data['errors'],400);
         }
-        return response()->json($data,200);
+        return redirect()->route('dashboard');
 
 
 
